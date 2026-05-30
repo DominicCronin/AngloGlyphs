@@ -4,6 +4,8 @@
 
 AngloGlyphs is a font and example library for adding Anglo concertina button annotations to ABC notation.
 
+The concertina symbols live in the Unicode **Private Use Area** (often abbreviated **PUA**). That is the correct place for these specialist glyphs: Unicode does not assign standard codepoints for Anglo concertina button symbols, so the font publishes them in private-use codepoint slots instead.
+
 This repository provides:
 
 - `AngloGlyphs.otf`, the font containing the Anglo concertina Private Use Area glyphs
@@ -20,6 +22,8 @@ The glyphs represent Anglo concertina buttons by:
 - button number: shown inside the shape
 
 The notation is about the button choice, not left-hand versus right-hand placement.
+
+The published mapping metadata in this repository is for the **Wheatstone** fingering system. Supporting automatic adjustment for **Jeffries** fingering would be a useful future improvement to the annotation skill.
 
 ## Installing the font
 
@@ -79,6 +83,8 @@ The skill uses:
 
 - `data\manifest\glyphs.json` as its public source of truth
 - files in `abc\` as the normal input and output location
+
+At present, the published mapping data is Wheatstone-based. Jeffries-aware annotation support would be a reasonable future enhancement rather than something to assume silently.
 
 ## Customizing the skill to match your preferences
 

@@ -17,6 +17,7 @@ Use this skill when working on ABC notation files in this repository that need A
 ## Source of truth
 
 - Treat `data\manifest\glyphs.json` as the canonical machine-readable mapping for this public repository.
+- Treat that published mapping as Wheatstone-based unless the user explicitly asks for a different fingering system.
 - For ABC annotation text, use the canonical codepoints from that mapping file.
 - Do **not** silently switch between numbering systems. The canonical font numbering and legacy annotation numbering may differ.
 
@@ -64,6 +65,7 @@ If a note has multiple plausible buttonings and the heuristic choice is musicall
   - canonical note-to-glyph mapping, or
   - preservation of a legacy fingering system.
 - Check for numbering-system mismatches before converting.
+- Check for Wheatstone versus Jeffries fingering-system mismatches before converting or generating annotations.
 - Double-check that the selected codepoint matches the public mapping entry for the intended glyph.
 - If the user's expectation cites a specific shape, direction, or button, prefer that evidence over an unverified inferred mapping.
 
@@ -74,6 +76,6 @@ Stop and ask if any of these are true:
 - the source annotation system is unknown,
 - multiple numbering schemes are in play,
 - the file mixes more than one annotation convention,
+- Wheatstone and Jeffries assumptions appear to be in conflict,
 - the target should preserve historical fingering rather than choose a new one,
 - the published font and `data\manifest\glyphs.json` appear to disagree.
-

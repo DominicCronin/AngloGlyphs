@@ -2,6 +2,8 @@
 
 This repository uses AngloGlyphs Private Use Area glyphs in ABC under-note annotations to display Anglo concertina fingering.
 
+These glyphs are published in the Unicode Private Use Area because there is no standard Unicode block for Anglo concertina button symbols.
+
 ## Core assumptions
 
 - Row shape encodes notation row, not pitch family:
@@ -16,12 +18,15 @@ This repository uses AngloGlyphs Private Use Area glyphs in ABC under-note annot
 - `data\manifest\glyphs.json` is the canonical public mapping for annotation work in this repository.
 - `AngloGlyphs.otf` is the published font file that should render those codepoints.
 - `abc\` contains annotated and unannotated tune files that can be used as examples or targets.
+- The published mapping metadata is based on the Wheatstone fingering system.
 
 ## Codepoint rule
 
 For AngloGlyphs ABC annotation work, default to the canonical codepoints from `data\manifest\glyphs.json`.
 
 If a future font release intentionally renumbers any block, treat that as an explicit migration rather than something to infer.
+
+Do not silently reinterpret the published Wheatstone-based mapping as Jeffries fingering. If Jeffries handling is required, treat that as an explicit conversion or a future extension to the workflow.
 
 ## Conversion guidance
 
