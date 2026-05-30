@@ -2,13 +2,13 @@
 
 ![Annotated staff notation example](AnnotatedStaff.png)
 
-AngloGlyphs is a font and example library for adding Anglo concertina button annotations to ABC notation.
+AngloGlyphs is a font and example library for adding Anglo concertina button annotations to ABC notation or other music notations. It's inspired by the system used in the book "The Anglo Concertina for absolute beginners by Chris Sherburn and Dave Mallinson". I understand the notation system to have been devised by Mally, and while the font is all my own work (with significant AI help), all rights over the notation system itself remain firmly where they belong. I hope the font will be useful to all who have enjoyed the book and wish to continue using the notation in their ongoing musical journey. 
 
 The concertina symbols live in the Unicode **Private Use Area** (often abbreviated **PUA**). That is the correct place for these specialist glyphs: Unicode does not assign standard codepoints for Anglo concertina button symbols, so the font publishes them in private-use codepoint slots instead.
 
 This repository provides:
 
-- `AngloGlyphs.otf`, the font containing the Anglo concertina Private Use Area glyphs
+- `AngloGlyphs.otf`, the font containing the Anglo concertina glyphs
 - `abc\`, a growing library of annotated tunes
 - `data\manifest\glyphs.json`, the canonical public mapping from notes and buttons to AngloGlyphs codepoints
 - `.github\skills\concertina-abc-annotation\`, a Copilot skill for converting or generating ABC under-note annotations
