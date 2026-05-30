@@ -51,7 +51,7 @@ K:Amaj
 "_..."A "_..."B "_..."c
 ```
 
-The exact PUA character to use comes from `data\manifest\glyphs.json`. The example tune in `abc\Miss McLeod's Reel.abc` shows the format in real use.
+The exact PUA character to use comes from `data\manifest\glyphs.json`. The example tune in `abc\Miss McLeod's Reel.abc` shows the format in real use. Here you can see that without the font actually in use, the annotations aren't very readable. Scroll down for tips on dealing with that.
 
 ![Annotated ABC example](AnnotatedABC.png)
 
