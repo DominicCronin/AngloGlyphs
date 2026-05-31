@@ -49,13 +49,20 @@ Important:
 
 Use this when the ABC has notes but no concertina fingering.
 
-Apply heuristics in this order:
+Apply heuristics in this order. Work phrase-first rather than greedily fixing one note at a time:
 
 1. **Hard constraints**: only choose buttons whose note label matches the ABC pitch spelling and octave.
-2. **Accidental-row minimization**: only use the accidental row when required or when later heuristics clearly justify it.
-3. **Local continuity**: prefer keeping nearby notes on nearby buttons and avoid unnecessary hopping.
-4. **Bellows balance**: avoid awkward runs that force excessive uninterrupted push or pull sequences.
-5. **Determinism**: if several options remain, choose consistently so repeated runs give the same result.
+2. **Normalize ornaments first**: ornaments such as `~` do not change the underlying pitch for button selection, and repeated-note ornaments such as `~A2` should keep one button choice across the whole ornament group unless the user explicitly asks otherwise.
+3. **Generate candidates per phrase**: gather the candidate buttons for at least the next note, and usually the whole bar or repeated figure, before committing to one choice.
+4. **Accidental-row minimization**: only use the accidental row when required or when later heuristics clearly justify it.
+5. **Local continuity**: prefer keeping nearby notes on nearby buttons and avoid unnecessary hopping. Treat the accidental and C rows as adjacent for hopping avoidance even though the G row sits between them visually, so transitions like accidental-row 2 to C-row 1 should still be penalized.
+6. **Same-finger transitions**: reject or heavily penalize consecutive notes on different physical buttons that use the same finger number, including across barlines and repeat marks. Repeating the same physical button is fine; moving between two distinct `1` buttons, two distinct `2` buttons, or two distinct `3` buttons usually indicates poor fingering.
+7. **Singleton propagation**: if a note has only one viable button, treat it as fixed and eliminate conflicting candidates on neighboring notes before choosing among the remaining options.
+8. **Shared-button preference**: when two adjacent notes can stay on the same physical button with a push/pull change, prefer that over a same-finger move between different buttons.
+9. **Lookahead tie-breaker**: among surviving candidates, prefer the one that leaves the next note with the widest conflict-free choice set. If still tied, prefer fewer row changes and then the lower button number.
+10. **Bellows balance**: avoid awkward runs that force excessive uninterrupted push or pull sequences.
+11. **Post-pass audit**: after annotating the phrase, scan for distinct same-finger transitions, hidden barline or repeat-boundary hops, unnecessary accidental-row choices, and ornaments that changed button choice without changing pitch. Rewrite any failing span instead of leaving a known bad transition in place.
+12. **Determinism**: if several options remain, choose consistently so repeated runs give the same result.
 
 If a note has multiple plausible buttonings and the heuristic choice is musically significant, surface that uncertainty instead of pretending the choice is canonical.
 
@@ -67,6 +74,7 @@ If a note has multiple plausible buttonings and the heuristic choice is musicall
 - Check for numbering-system mismatches before converting.
 - Check for Wheatstone versus Jeffries fingering-system mismatches before converting or generating annotations.
 - Double-check that the selected codepoint matches the public mapping entry for the intended glyph.
+- If the manifest metadata appears inconsistent with the tune context or the published ABC examples, stop and call out the discrepancy instead of silently normalizing it.
 - If the user's expectation cites a specific shape, direction, or button, prefer that evidence over an unverified inferred mapping.
 
 ## When not to proceed without clarification
