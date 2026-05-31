@@ -13,6 +13,16 @@ This repository provides:
 - `data\manifest\glyphs.json`, the canonical public mapping from notes and buttons to AngloGlyphs codepoints
 - `.github\skills\concertina-abc-annotation\`, a Copilot skill for converting or generating ABC under-note annotations
 
+## Licensing
+
+The `AngloGlyphs.otf` font should be treated as a font released under the **SIL Open Font License 1.1 (OFL-1.1)**. The current build pipeline derives numeral and base-font material from **Liberation Sans**, so the resulting font is not an MIT-only artifact.
+
+That OFL licensing applies to the font itself and to modified versions of the font. It does **not** apply to documents created with the font, such as ABC files, PDFs, tune books, or rendered music examples.
+
+For material in `abc\`, the intention is that contributed annotated tunes be shared under **CC BY 4.0**, unless a file clearly says otherwise.
+
+See [LICENSE.md](LICENSE.md) for the repository-wide license map, plus [LICENSES/OFL-1.1.txt](LICENSES/OFL-1.1.txt) and [LICENSES/CC-BY-4.0.txt](LICENSES/CC-BY-4.0.txt) for the full license texts.
+
 ## What the font encodes
 
 The glyphs represent Anglo concertina buttons by:
