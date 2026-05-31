@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AngloGlyphs browser test</title>
+  <style>
+    @font-face {
+      font-family: "AngloGlyphsTest";
+      src: url("./AngloGlyphs.otf") format("opentype");
+      font-display: block;
+    }
+
+    :root {
+      color-scheme: light dark;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 24px;
+      line-height: 1.4;
+    }
+
+    h1,
+    h2 {
+      margin-bottom: 8px;
+    }
+
+    .note {
+      max-width: 72rem;
+      margin-bottom: 24px;
+    }
+
+    .sample-line {
+      font-family: "AngloGlyphsTest", sans-serif;
+      font-size: 48px;
+      letter-spacing: 0.12em;
+      margin: 16px 0 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+      max-width: 72rem;
+    }
+
+    .card {
+      border: 1px solid #8886;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .glyph {
+      font-family: "AngloGlyphsTest", sans-serif;
+      font-size: 64px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .meta {
+      font-size: 14px;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>AngloGlyphs browser test</h1>
+  <p class="note">
+    This page loads <code>AngloGlyphs.otf</code> from the same folder via <code>@font-face</code>.
+    If the browser is using the font correctly, the sample line and all cards below should show the concertina button glyphs rather than empty boxes.
+  </p>
+
+  <div class="sample-line" id="sample-line"></div>
+  <div id="sections"></div>
+
+  <script>
+    const sections = [
+      { title: "Push C-row (square)", start: 0xE000, end: 0xE009, mode: "push", row: "C-row" },
+      { title: "Push G-row (circle)", start: 0xE00A, end: 0xE013, mode: "push", row: "G-row" },
+      { title: "Push accidentals (diamond)", start: 0xE014, end: 0xE01D, mode: "push", row: "Accidental row" },
+      { title: "Pull C-row (square)", start: 0xE01E, end: 0xE027, mode: "pull", row: "C-row" },
+      { title: "Pull G-row (circle)", start: 0xE028, end: 0xE031, mode: "pull", row: "G-row" },
+      { title: "Pull accidentals (diamond)", start: 0xE032, end: 0xE03B, mode: "pull", row: "Accidental row" },
+      { title: "Push square 10-19", start: 0xE03C, end: 0xE045, mode: "push", row: "Supplemental square", labelStart: 10 },
+      { title: "Push circle 10-19", start: 0xE046, end: 0xE04F, mode: "push", row: "Supplemental circle", labelStart: 10 },
+      { title: "Push diamond 10-19", start: 0xE050, end: 0xE059, mode: "push", row: "Supplemental diamond", labelStart: 10 },
+      { title: "Pull square 10-19", start: 0xE05A, end: 0xE063, mode: "pull", row: "Supplemental square", labelStart: 10 },
+      { title: "Pull circle 10-19", start: 0xE064, end: 0xE06D, mode: "pull", row: "Supplemental circle", labelStart: 10 },
+      { title: "Pull diamond 10-19", start: 0xE06E, end: 0xE077, mode: "pull", row: "Supplemental diamond", labelStart: 10 }
+    ];
+
+    const sampleCodepoints = [0xE000, 0xE00A, 0xE014, 0xE01E, 0xE028, 0xE032, 0xE03C, 0xE046, 0xE050, 0xE05A, 0xE064, 0xE06E];
+    document.getElementById("sample-line").textContent = sampleCodepoints.map((cp) => String.fromCodePoint(cp)).join(" ");
+
+    const root = document.getElementById("sections");
+
+    for (const section of sections) {
+      const heading = document.createElement("h2");
+      heading.textContent = section.title;
+      root.appendChild(heading);
+
+      const grid = document.createElement("div");
+      grid.className = "grid";
+
+      for (let codepoint = section.start; codepoint <= section.end; codepoint += 1) {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const glyph = document.createElement("div");
+        glyph.className = "glyph";
+        glyph.textContent = String.fromCodePoint(codepoint);
+        card.appendChild(glyph);
+
+        const buttonIndex = codepoint - section.start;
+        const buttonLabel = section.labelStart === undefined
+          ? (buttonIndex === 9 ? "0" : String(buttonIndex + 1))
+          : String(section.labelStart + buttonIndex);
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        meta.innerHTML =
+          `<div><code>U+${codepoint.toString(16).toUpperCase()}</code></div>` +
+          `<div>${section.mode}, ${section.row}</div>` +
+          `<div>button ${buttonLabel}</div>`;
+        card.appendChild(meta);
+
+        grid.appendChild(card);
+      }
+
+      root.appendChild(grid);
+    }
+  </script>
+</body>
+</html>
