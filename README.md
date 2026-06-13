@@ -1,39 +1,27 @@
 # AngloGlyphs
 
 ![Annotated staff notation example](AnnotatedStaff.png)
+AngloGlyphs is a font and example library for adding Anglo concertina button annotations to ABC notation or other music notations. 
 
-AngloGlyphs is a font and example library for adding Anglo concertina button annotations to ABC notation or other music notations. It's inspired by the system used in the book "The Anglo Concertina for absolute beginners by Chris Sherburn and Dave Mallinson". I understand the notation system to have been devised by Mally, and while the font is all my own work (with significant AI help), all rights over the notation system itself remain firmly where they belong. I hope the font will be useful to all who have enjoyed the book and wish to continue using the notation in their ongoing musical journey. 
+## Acknowledgements
+The idea of creating the AngloGlyphs font was inspired by the notation system used in the book "The Anglo Concertina for absolute beginners by Chris Sherburn and Dave Mallinson". When I first asked Chris about it he said "the whole idea is Mally's", although I wasn't too clear if he meant the notation or the book itself. I subsequently had more information from Mally, who said: "The initial concept of the concertina tab was Mick Bramich’s in The Irish Concertina. Mine is a variation." Mick Bramich's book uses black and white backgrounds to indicate push/pull, but beyond that the two systems have diverged somewhat.
+I also had contact with Michael Eskin, who suggested that adding glyphs for the number 10 would make the font useful to people familiar with the numbering used by Gary Coover in his notation system. Michael has already published some useful custom mappings on his ABC tools website. 
 
-The concertina symbols live in the Unicode **Private Use Area** (often abbreviated **PUA**). That is the correct place for these specialist glyphs: Unicode does not assign standard codepoints for Anglo concertina button symbols, so the font publishes them in private-use codepoint slots instead.
+While the font is all my own work (with significant AI help), all rights over the various notation systems remain firmly where they belong.
 
+## Contents
 This repository provides:
 
 - `AngloGlyphs.otf`, the font containing the Anglo concertina glyphs
 - `abc\`, a growing library of annotated tunes
-- `data\manifest\glyphs.json`, the canonical public mapping from notes and buttons to AngloGlyphs codepoints
+- `data\manifest\glyphs.json`, the mapping from notes and buttons to AngloGlyphs codepoints 
 - `.github\skills\concertina-abc-annotation\`, a Copilot skill for converting or generating ABC under-note annotations
+
+The mapping and the skill currently cover only the combination of Mallinson notation on a Wheatstone system concertina, but if there's interest in adding more variations, please let me know.
 
 ## Licensing
 
-The `AngloGlyphs.otf` font should be treated as a font released under the **SIL Open Font License 1.1 (OFL-1.1)**. The current build pipeline derives numeral and base-font material from **Liberation Sans**, so the resulting font is not an MIT-only artifact.
-
-That OFL licensing applies to the font itself and to modified versions of the font. It does **not** apply to documents created with the font, such as ABC files, PDFs, tune books, or rendered music examples.
-
-For material in `abc\`, the intention is that contributed annotated tunes be shared under **CC BY 4.0**, unless a file clearly says otherwise.
-
 See [LICENSE.md](LICENSE.md) for the repository-wide license map, plus [LICENSES/OFL-1.1.txt](LICENSES/OFL-1.1.txt) and [LICENSES/CC-BY-4.0.txt](LICENSES/CC-BY-4.0.txt) for the full license texts.
-
-## What the font encodes
-
-The glyphs represent Anglo concertina buttons by:
-
-- shape: C-row = square, G-row = circle, accidental row = diamond
-- direction: push and pull are separate glyphs
-- button number: shown inside the shape
-
-The notation is about the button choice, not left-hand versus right-hand placement.
-
-The published mapping metadata in this repository is for the **Wheatstone** fingering system. Supporting automatic adjustment for **Jeffries** fingering would be a useful future improvement to the annotation skill.
 
 ## Installing the font
 
@@ -46,6 +34,8 @@ Install `AngloGlyphs.otf` in the normal way for your operating system.
 If a web page or notation tool does not pick the font up immediately, a refresh or browser restart may help.
 
 ## Using AngloGlyphs in ABC
+
+**The concertina symbols live in the Unicode **Private Use Area** (often abbreviated **PUA**). That is the correct place for these specialist glyphs: Unicode does not assign standard codepoints for Anglo concertina button symbols, so the font publishes them in private-use codepoint slots instead.**
 
 The basic ABC directive is:
 
